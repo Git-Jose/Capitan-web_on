@@ -5,6 +5,7 @@ var cursores;
 var intervalobalas = 0;
 var vencidas = 50;
 var texto;
+var texto2;
 var cuenta;
 var espacio;
 var balas;
@@ -20,6 +21,9 @@ var irAb = false;
 var irDisp = false;
 var ostion;
 var tween;
+var indice = 0;
+var colorin;
+var charla = ["Webon a base: tenemos un problema", "Base a Webon: ¿Que problema?", "Nadie pensó en poner un baño a la nave", "Se pensó pero no había presupuesto", "Haré una parada", "Espera a llegar", "No puedo", "Entonces usa la ventanilla", "Veo un planeta, inicio maniobra de aproximación", "¡¡¡No!!!, ahí no hay papel", "Webon a base: cambio y corto"]
 huevo.naves.prototype = {
 	create: function() {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -34,6 +38,11 @@ huevo.naves.prototype = {
 		this.game.physics.arcade.enable(espacio, Phaser.Physics.ARCADE);
 		ostion = this.game.add.sprite(this.game.world.width, (this.game.world.height / 2) - 258, 'planeta');
 		this.game.physics.arcade.enable(ostion, Phaser.Physics.ARCADE);
+		texto2 = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "", {
+			fill: 'white'
+		});
+		texto2.anchor.setTo(0.5, 0.5);
+		texto2.text.visible = false;
 		balas = game.add.group();
 		balas.enableBody = true;
 		balas.physicsBodyType = Phaser.Physics.ARCADE;
@@ -65,6 +74,7 @@ huevo.naves.prototype = {
 		explosiones = game.add.group();
 		explosiones.createMultiple(30, 'boom');
 		frito = this.game.add.group();
+
 
 		// botones de toque
 		botonArriba = game.add.button(2, this.game.world.height - 40, 'flechaar', null, this);
@@ -179,18 +189,29 @@ huevo.naves.prototype = {
 			if (vencidas < 1) {
 				enemigos.callAll('kill');
 				balaenemigas.callAll('kill');
-				texto = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Villahuevo, aquí webon aproximándose al planeta', {
-					fill: 'white'
-				});
-				texto.anchor.setTo(0.5, 0.5);
-				ostion.body.velocity.x = -75;
+
+
+				ostion.body.velocity.x = -44;
 				tween = game.add.tween(ostion.scale).to({
 					x: 3,
 					y: 3
 				}, 7500, Phaser.Easing.Linear.None, true, 0, 0, false);
-				vencidas = 50;
+				dialogos();
+			}
+		}
+
+		function dialogos() {
+			game.time.events.add(Phaser.Timer.SECOND * 1.5, dialogos, this);
+			if (indice < charla.length) {
+				texto2.setText(charla[indice]);
+				if ((indice === 1) || (indice === 3) || (indice === 5) || (indice === 7) || (indice === 9) || (indice === 11)) {
+					texto2.fill = 'white';
+				} else {
+					texto2.fill = 'red';
+				}
 
 			}
+			indice++;
 		}
 
 		function aterrizaje() {
@@ -200,7 +221,8 @@ huevo.naves.prototype = {
 			explosion.reset(jugador.x, jugador.y);
 			explosion.animations.add('boom', [0, 1, 2, 3, 4, 5], 10, false);
 			explosion.play('boom', 30, false, true);
-			texto.text = '...buen aterrizaje Webon, buen aterrizaje...';
+			texto2.text = '...buen aterrizaje Webon, buen aterrizaje...';
+			texto2.fill = 'white';
 			this.sonido.stop();
 			ostion.body.velocity.x = 0;
 			game.input.onDown.addOnce(continuar, this);
@@ -214,6 +236,8 @@ huevo.naves.prototype = {
 		}
 
 		function continuar() {
+			vencidas = 50;
+			indice = 0;
 			this.sonido.stop();
 			this.game.state.start('Juego');
 		}
