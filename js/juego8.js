@@ -13,8 +13,6 @@ var frito;
 var irIz = false;
 var irDer = false;
 var saltar = false;
-var duracion = 0;
-var botonIzquierda;
 huevo.Juego8.prototype = {
 	create: function() {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -48,35 +46,20 @@ huevo.Juego8.prototype = {
 		frito = this.game.add.group();
 		// botones de toque
 		botonIzquierda = game.add.button(2, this.game.world.height - 40, 'flechaiz', null, this);
-		//botonIzquierda= game.add.sprite(2, this.game.world.height - 40, 'flechaiz');
-		//botonIzquierda.inputEnabled = true;
-		//  botonIzquierda.events.onInputOver.add(function(){irIz=true;});
-		//  botonIzquierda.events.onInputOut.add(function(){irIz=false;});
 		botonIzquierda.events.onInputDown.add(function() {
 			irIz = true;
 		});
 		botonIzquierda.events.onInputUp.add(function() {
 			irIz = false;
 		});
-
-		// game.input.addPointer();
-		// botonIzquierda.events.onInputDown.add (this.toqueIz, this);
-		// botonIzquierda.events.onInputUp.add (this.toqueIzno, this);
-
 		botonDerecha = game.add.button(66, this.game.world.height - 40, 'flechade', null, this);
-		// botonDerecha.events.onInputOver.add(function(){irDer=true;});
-		//  botonDerecha.events.onInputOut.add(function(){irDer=false;});
 		botonDerecha.events.onInputDown.add(function() {
 			irDer = true;
 		});
 		botonDerecha.events.onInputUp.add(function() {
 			irDer = false;
 		});
-
-
 		botonSaltar = game.add.button(this.game.world.width - 36, this.game.world.height - 40, 'saltar', null, this);
-		//  botonSaltar.events.onInputOver.add(function(){saltar=true;});
-		//  botonSaltar.events.onInputOut.add(function(){saltar=false;});
 		botonSaltar.events.onInputDown.add(function() {
 			saltar = true;
 		});

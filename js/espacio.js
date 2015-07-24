@@ -18,6 +18,8 @@ var control = 0;
 var irAr = false;
 var irAb = false;
 var irDisp = false;
+var ostion;
+var tween;
 huevo.naves.prototype = {
 	create: function() {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -30,6 +32,8 @@ huevo.naves.prototype = {
 		espacio = this.game.add.tileSprite(0, 0, 800, 600, 'fondo');
 		this.game.world.setBounds(0, 0, 800, 600);
 		this.game.physics.arcade.enable(espacio, Phaser.Physics.ARCADE);
+		ostion = this.game.add.sprite(this.game.world.width, (this.game.world.height / 2) - 258, 'planeta');
+		this.game.physics.arcade.enable(ostion, Phaser.Physics.ARCADE);
 		balas = game.add.group();
 		balas.enableBody = true;
 		balas.physicsBodyType = Phaser.Physics.ARCADE;
@@ -61,7 +65,7 @@ huevo.naves.prototype = {
 		explosiones = game.add.group();
 		explosiones.createMultiple(30, 'boom');
 		frito = this.game.add.group();
-		
+
 		// botones de toque
 		botonArriba = game.add.button(2, this.game.world.height - 40, 'flechaar', null, this);
 		botonArriba.events.onInputDown.add(function() {
@@ -84,7 +88,7 @@ huevo.naves.prototype = {
 		botonDisparo.events.onInputUp.add(function() {
 			irDisp = false;
 		});
-		
+
 		this.cuentavidas();
 		puntuacion = this.game.add.text(10, this.game.world.height - 590, 'Puntos: ' + puntos, {
 			font: '34px Arial',
@@ -104,11 +108,11 @@ huevo.naves.prototype = {
 	},
 	update: function() {
 		//		this.game.physics.arcade.overlap(jugador, estrellas, cogeEstrellas, null, this);
+		this.game.physics.arcade.overlap(jugador, ostion, aterrizaje, null, this);
 		this.game.physics.arcade.overlap(jugador, enemigos, chocaEnemigos, null, this);
 		this.game.physics.arcade.overlap(balas, enemigos, pum, null, this);
 		this.game.physics.arcade.overlap(jugador, balaenemigas, chocaEnemigos, null, this);
 		espacio.tilePosition.x -= 2;
-	
 		if (cursores.up.isDown || irAr === true) {
 			jugador.body.velocity.y = -150;
 			jugador.animations.play('arriba');
@@ -175,14 +179,31 @@ huevo.naves.prototype = {
 			if (vencidas < 1) {
 				enemigos.callAll('kill');
 				balaenemigas.callAll('kill');
-				texto = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Enhorabuena', {
+				texto = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Villahuevo, aquí webon aproximándose al planeta', {
 					fill: 'white'
 				});
 				texto.anchor.setTo(0.5, 0.5);
+				ostion.body.velocity.x = -75;
+				tween = game.add.tween(ostion.scale).to({
+					x: 3,
+					y: 3
+				}, 7500, Phaser.Easing.Linear.None, true, 0, 0, false);
 				vencidas = 50;
-				this.sonido.stop();
-				game.input.onDown.addOnce(continuar, this);
+
 			}
+		}
+
+		function aterrizaje() {
+			this.sonidopuf.play();
+			jugador.kill();
+			var explosion = explosiones.getFirstExists(false);
+			explosion.reset(jugador.x, jugador.y);
+			explosion.animations.add('boom', [0, 1, 2, 3, 4, 5], 10, false);
+			explosion.play('boom', 30, false, true);
+			texto.text = '...buen aterrizaje Webon, buen aterrizaje...';
+			this.sonido.stop();
+			ostion.body.velocity.x = 0;
+			game.input.onDown.addOnce(continuar, this);
 		}
 
 		function gameover() {

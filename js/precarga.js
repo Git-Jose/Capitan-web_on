@@ -34,13 +34,14 @@ huevo.Precarga.prototype = {
 		this.load.image('balas', 'recursos/imagenes/balaenemiga.png');
 		this.load.image('disp', 'recursos/imagenes/disp.png');
 		this.load.spritesheet('enemigo', 'recursos/imagenes/enemigo.png', 52, 40);
-		this.load.spritesheet('boom', 'recursos/imagenes/explosion.png', 112, 84);
-		//this.load.image('planeta', 'recursos/imagenes/planeta.png');
+		this.load.spritesheet('boom', 'recursos/imagenes/explosionar.png', 112, 84);
+		this.load.image('planeta', 'recursos/imagenes/planeta.png');
 		this.load.image('flechaiz', 'recursos/imagenes/flechaiz.png');
 		this.load.image('flechade', 'recursos/imagenes/flechade.png');
 		this.load.image('flechaar', 'recursos/imagenes/flechaar.png');
 		this.load.image('flechaab', 'recursos/imagenes/flechaab.png');
 		this.load.image('saltar', 'recursos/imagenes/saltar.png');
+		this.load.image('crash', 'recursos/imagenes/crash.png', 409, 272);
 	},
 	create: function() {
 		this.game.state.start('Menu');
