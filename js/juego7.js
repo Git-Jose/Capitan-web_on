@@ -20,7 +20,7 @@ huevo.Juego7.prototype = {
 		this.sonido.loop = true;
 		this.sonido.play();
 		this.game.add.image(0, 0, 'fondo7');
-		this.game.add.image(this.game.world.width - 800, this.game.world.height - 200, 'piedra');
+		//this.game.add.image(this.game.world.width - 800, this.game.world.height - 200, 'piedra');
 		plataformas = this.game.add.group();
 		plataformas.enableBody = true;
 		var repisa = plataformas.create(200, 350, 'plataforma');

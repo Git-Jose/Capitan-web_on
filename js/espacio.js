@@ -255,8 +255,8 @@ huevo.naves.prototype = {
 				if (tirador.x > 10) {
 					balaenemiga.reset(tirador.body.x, tirador.body.y);
 				}
-				game.physics.arcade.moveToObject(balaenemiga, jugador, 120);
-				intervalofuego = game.time.now + 2000;
+				game.physics.arcade.moveToObject(balaenemiga, jugador, 520);
+				intervalofuego = game.time.now + 1000;
 			}
 		}
 	},

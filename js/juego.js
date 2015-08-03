@@ -26,10 +26,12 @@ huevo.Juego.prototype = {
 		this.game.add.image(this.game.world.width - 803, this.game.world.height - 200, 'cohete');
 		plataformas = this.game.add.group(); //********************************Crea un grupo para las plataformas y el suelo
 		plataformas.enableBody = true; //*********************************Activa las físicas para los objetos del grupo
-		var repisa = plataformas.create(400, 400, 'plataforma'); //*******Coloca las repisas
+		var repisa = plataformas.create(400, 350, 'plataforma'); //*******Coloca las repisas
 		repisa.body.immovable = true; //**********************************Convierte la repisa en inmóvil al caer sobre ellas
 		repisa = plataformas.create(-150, 250, 'plataforma'); //**********Coloca otra repisa
 		repisa.body.immovable = true; //**********************************La hace inmóvil
+		repisa = plataformas.create(370, 350, 'pared');
+		repisa.body.immovable = true; 
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo'); //Coloca el suelo
 		suelo.body.immovable = true; //**************************************Lo hace inmóvil
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota'); //**Coloca el jugador

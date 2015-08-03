@@ -9,6 +9,11 @@ huevo.Precarga.prototype = {
 		this.load.audio('boing', 'recursos/audio/botar.ogg')
 		this.load.audio('puf', 'recursos/audio/puf.ogg');
 		this.load.audio('sonido', 'recursos/audio/sonido.ogg');
+		this.load.audio('musicafondo', 'recursos/audio/musica.mp3');
+		this.load.audio('ping', 'recursos/audio/coger.mp3');
+		this.load.audio('boing', 'recursos/audio/botar.mp3')
+		this.load.audio('puf', 'recursos/audio/puf.mp3');
+		this.load.audio('sonido', 'recursos/audio/sonido.mp3');
 		//this.load.image('espacio', 'recursos/imagenes/espacio.png');//ultima
 		this.load.image('fondo', 'recursos/imagenes/fondo.png');
 		this.load.image('fondo2', 'recursos/imagenes/fondo2.png');
@@ -23,8 +28,10 @@ huevo.Precarga.prototype = {
 		this.load.image('boton', 'recursos/imagenes/boton.png');
 		this.load.image('estrella', 'recursos/imagenes/estrella.png');
 		this.load.image('plataforma', 'recursos/imagenes/plataforma.png');
-		this.load.image('piedra', 'recursos/imagenes/piedra.png');
-		this.load.spritesheet('prota', 'recursos/imagenes/prota.png', 97, 31);
+		this.load.image('pared', 'recursos/imagenes/pared.png');
+		//this.load.image('piedra', 'recursos/imagenes/piedra.png');
+		this.load.spritesheet('prota', 'recursos/imagenes/prota.png', 80.6, 31);
+		//this.load.spritesheet('prota', 'recursos/imagenes/prota_nuevo.png', 80.6, 31);
 		this.load.spritesheet('capitulo', 'recursos/imagenes/capitulo.png', 800, 90);
 		this.load.spritesheet('nave', 'recursos/imagenes/nave.png', 64, 64);
 		this.load.image('frito', 'recursos/imagenes/frito.png');
@@ -41,7 +48,7 @@ huevo.Precarga.prototype = {
 		this.load.image('flechaar', 'recursos/imagenes/flechaar.png');
 		this.load.image('flechaab', 'recursos/imagenes/flechaab.png');
 		this.load.image('saltar', 'recursos/imagenes/saltar.png');
-		this.load.image('crash', 'recursos/imagenes/crash.png', 409, 272);
+		//this.load.image('crash', 'recursos/imagenes/crash.png', 409, 272);
 	},
 	create: function() {
 		this.game.state.start('Menu');
