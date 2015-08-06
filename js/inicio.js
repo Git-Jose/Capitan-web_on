@@ -13,7 +13,8 @@ huevo.inicio.prototype = {
 		this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.game.scale.pageAlignHorizontally = true;
 		this.game.scale.pageAlignVertically = true;
-		this.scale.setScreenSize(true);
+	//	this.scale.setScreenSize(true);
+		this.scale.updateLayout(true);
 		this.game.state.start('Precarga');
 	}
 };
