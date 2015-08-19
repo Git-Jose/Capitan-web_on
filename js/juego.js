@@ -13,6 +13,7 @@ var frito;
 var irIz = false;
 var irDer = false;
 var saltar = false;
+var vextra;
 huevo.Juego.prototype = {
 	create: function() {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -30,8 +31,11 @@ huevo.Juego.prototype = {
 		repisa.body.immovable = true; //**********************************Convierte la repisa en inmóvil al caer sobre ellas
 		repisa = plataformas.create(-150, 250, 'plataforma'); //**********Coloca otra repisa
 		repisa.body.immovable = true; //**********************************La hace inmóvil
-		repisa = plataformas.create(370, 350, 'pared');
-		repisa.body.immovable = true; 
+		var movil = plataformas.create(370, 350, 'pared'); //Coloca la pared
+		game.add.tween(movil).to({
+			y: 230
+		}, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true); //Movimiento de la pared
+		movil.body.immovable = true; //**********************************Hace la pared inmóvil a empujones
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo'); //Coloca el suelo
 		suelo.body.immovable = true; //**************************************Lo hace inmóvil
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota'); //**Coloca el jugador
@@ -93,6 +97,7 @@ huevo.Juego.prototype = {
 		this.game.physics.arcade.collide(jugador, plataformas); //***************Colisión entre el jugador y las plataformas
 		this.game.physics.arcade.collide(estrellas, plataformas); //*************Colisión entre las estrellas y las plataformas
 		this.game.physics.arcade.collide(ninjas, plataformas);
+		this.game.physics.arcade.overlap(jugador, vextra, vidaextra, null, this);
 		this.game.physics.arcade.overlap(jugador, estrellas, cogeEstrellas, null, this); //Si el jugador se solapa con alguna estrella se llama a la función cogeEstrellas
 		this.game.physics.arcade.overlap(jugador, ninjas, chocaEstrellas, null, this);
 		jugador.body.velocity.x = 0; //*************************************Velocidad lateral del jugador a cero
@@ -110,6 +115,7 @@ huevo.Juego.prototype = {
 			jugador.body.velocity.y = -350;
 			this.sonidosaltar.play();
 		}
+
 		function chocaEstrellas(jugador, ninja) {
 			this.sonidopuf.play();
 			ninja.kill();
@@ -139,9 +145,14 @@ huevo.Juego.prototype = {
 			cogidas -= 1;
 			puntos += 10;
 			puntuacion.text = 'Puntos: ' + puntos;
-			if (puntos === 100) {
-				vidas++;
-				this.cuentavidas();
+			if (puntos === 600) {
+				vextra = this.game.add.sprite(100, this.game.world.height - 95, 'vextra');
+				this.game.physics.arcade.enable(vextra, Phaser.Physics.ARCADE);
+				vextra.animations.add('vextra', [0, 1, 2, 3, 4], 10, true);
+				vextra.animations.play('vextra');
+
+
+
 			}
 			if (cogidas < 1) {
 				ninjas.callAll('kill');
@@ -159,14 +170,20 @@ huevo.Juego.prototype = {
 			this.sonido.stop();
 			this.game.state.start('Menu');
 		}
+
+		function vidaextra() {
+			vidas++;
+			vextra.kill();
+			this.cuentavidas();
+		}
 	},
 	cuentavidas: function() {
-			frito.callAll('kill');
-			for (i = 0; i < vidas; i++) {
-				var hfrito = frito.create(this.game.world.width - 150 + (30 * i), this.game.world.height - 590, 'frito');
-			}
+		frito.callAll('kill');
+		for (i = 0; i < vidas; i++) {
+			var hfrito = frito.create(this.game.world.width - 150 + (30 * i), this.game.world.height - 590, 'frito');
 		}
-		//	render: function() {
-		//this.game.debug.bodyInfo(jugador, 24, 24);
-		//}
+	}
+	//	render: function() {
+	//this.game.debug.bodyInfo(jugador, 24, 24);
+	//}
 };

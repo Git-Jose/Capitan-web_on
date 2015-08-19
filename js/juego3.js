@@ -24,10 +24,13 @@ huevo.Juego3.prototype = {
 		plataformas.enableBody = true;
 		var repisa = plataformas.create(500, 100, 'plataforma');
 		repisa.body.immovable = true;
-		var repisa = plataformas.create(-125, 400, 'plataforma');
+		repisa = plataformas.create(-125, 400, 'plataforma');
 		repisa.body.immovable = true;
-		repisa = plataformas.create(-175, 250, 'plataforma');
-		repisa.body.immovable = true;
+		var movil = plataformas.create(-175, 250, 'phelada');
+		game.add.tween(movil).to({
+			x: this.game.world.width - 190
+		}, 5000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+		movil.body.immovable = true;
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo');
 		suelo.body.immovable = true;
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota');

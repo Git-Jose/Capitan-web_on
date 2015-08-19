@@ -28,10 +28,12 @@ huevo.Precarga.prototype = {
 		this.load.image('boton', 'recursos/imagenes/boton.png');
 		this.load.image('estrella', 'recursos/imagenes/estrella.png');
 		this.load.image('plataforma', 'recursos/imagenes/plataforma.png');
+		this.load.image('phelada', 'recursos/imagenes/phelada.png');
+		this.load.image('pmini', 'recursos/imagenes/pmini.png');
 		this.load.image('pared', 'recursos/imagenes/pared.png');
 		//this.load.image('piedra', 'recursos/imagenes/piedra.png');
 		this.load.spritesheet('prota', 'recursos/imagenes/prota.png', 80.6, 31);
-		//this.load.spritesheet('prota', 'recursos/imagenes/prota_nuevo.png', 80.6, 31);
+		this.load.spritesheet('vextra', 'recursos/imagenes/extra.png', 80.6, 31);
 		this.load.spritesheet('capitulo', 'recursos/imagenes/capitulo.png', 800, 90);
 		this.load.spritesheet('nave', 'recursos/imagenes/nave.png', 64, 64);
 		this.load.image('frito', 'recursos/imagenes/frito.png');

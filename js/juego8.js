@@ -32,7 +32,7 @@ huevo.Juego8.prototype = {
 		repisa.body.immovable = true; //**********************************La hace inmóvil
 		var movil = plataformas.create(370, 350, 'pared');//Coloca la pared
 		game.add.tween(movil).to({ y: 230 }, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);//Movimiento de la pared
-		movil.body.immovable = true; //**********************************La hace inmóvil
+		movil.body.immovable = true; //**********************************Hace la pared inmóvil a empujones
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo'); //Coloca el suelo
 		suelo.body.immovable = true; //**************************************Lo hace inmóvil
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota'); //**Coloca el jugador

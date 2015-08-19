@@ -22,8 +22,11 @@ huevo.Juego5.prototype = {
 		this.game.add.image(0, 0, 'fondo5');
 		plataformas = this.game.add.group();
 		plataformas.enableBody = true;
-		var repisa = plataformas.create(600, 350, 'plataforma');
-		repisa.body.immovable = true;
+		var movil = plataformas.create(400, 350, 'phelada');
+		game.add.tween(movil).to({
+			x: this.game.world.width - 90
+		}, 7000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+		movil.body.immovable = true;
 		var repisa = plataformas.create(-105, 200, 'plataforma');
 		repisa.body.immovable = true;
 		repisa = plataformas.create(555, 100, 'plataforma');

@@ -10,6 +10,7 @@ var cuenta;
 var irIz = false;
 var irDer = false;
 var saltar = false;
+var movil;
 huevo.Juego2.prototype = {
 	create: function() {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -22,8 +23,9 @@ huevo.Juego2.prototype = {
 		this.game.add.image(0, 0, 'fondo2');
 		plataformas = this.game.add.group();
 		plataformas.enableBody = true;
-		var repisa = plataformas.create(200, 100, 'plataforma');
-		repisa.body.immovable = true;
+		movil = plataformas.create(200, 100, 'plataforma');
+		//game.add.tween(movil).to({ y: 190 }, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);//Movimiento de la pared
+		movil.body.immovable = true;
 		var repisa = plataformas.create(400, 400, 'plataforma');
 		repisa.body.immovable = true;
 		repisa = plataformas.create(-150, 250, 'plataforma');
@@ -146,6 +148,13 @@ huevo.Juego2.prototype = {
 			cogidas = cogidas - 1;
 			puntos += 10;
 			puntuacion.text = 'Puntos: ' + puntos;
+			if (puntos === 650) {
+				var tween = game.add.tween(movil).to({
+					y: 50
+				}, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+				tween.loop();
+				tween.start();
+			}
 			if (cogidas < 1) {
 				ninjas.callAll('kill');
 				texto = this.game.add.text(this.game.world.centerX, this.game.world.centerY, 'Has ganado', {
