@@ -32,6 +32,6 @@ huevo.Menu.prototype = {
 	},
 	inicioJuego: function() {
 		this.bandasonora.stop();
-		this.game.state.start('Juego5');
+		this.game.state.start('naves');
 	}
 };

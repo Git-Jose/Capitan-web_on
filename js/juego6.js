@@ -24,20 +24,12 @@ huevo.Juego6.prototype = {
 		plataformas.enableBody = true;
 		var repisa = plataformas.create(200, 200, 'plataforma');
 		repisa.body.immovable = true;
-		//var movil = plataformas.create(-200, 350, 'phelada');
-		//game.add.tween(movil).to({
-		//	x: 0
-		//}, 7000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
-		//movil.body.immovable = true;
-		var movil1 = plataformas.create(300, 350, 'pmini');
-		//game.add.tween(movil1).to({
-		//	x: this.game.world.width - 90
-		//}, 7000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
-		game.add.tween(movil1).to({
+		var movil = plataformas.create(300, 390, 'pmini');
+		game.add.tween(movil).to({
 			x: [0, 0, 600, 600, 300],
-			y: [350, 90, 90, 350, 350]
+			y: [390, 90, 90, 390, 390]
 		}, 50000, Phaser.Easing.Linear.None, true, 6000, - 1, false);
-		movil1.body.immovable = true;
+		movil.body.immovable = true;
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo');
 		suelo.body.immovable = true;
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota');

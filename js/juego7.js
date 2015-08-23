@@ -20,15 +20,17 @@ huevo.Juego7.prototype = {
 		this.sonido.loop = true;
 		this.sonido.play();
 		this.game.add.image(0, 0, 'fondo7');
-		//this.game.add.image(this.game.world.width - 800, this.game.world.height - 200, 'piedra');
 		plataformas = this.game.add.group();
 		plataformas.enableBody = true;
-		var repisa = plataformas.create(200, 350, 'plataforma');
-		repisa.body.immovable = true;
 		var repisa = plataformas.create(-200, 150, 'plataforma');
 		repisa.body.immovable = true;
 		repisa = plataformas.create(600, 150, 'plataforma');
 		repisa.body.immovable = true;
+		var movil = plataformas.create(-98, 350, 'pmini');
+		game.add.tween(movil).to({
+			x: this.game.world.width - 98
+		}, 20000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+		movil.body.immovable = true;
 		var suelo = plataformas.create(0, this.game.world.height - 64, 'suelo');
 		suelo.body.immovable = true;
 		jugador = this.game.add.sprite(97, this.game.world.height - 150, 'prota');
